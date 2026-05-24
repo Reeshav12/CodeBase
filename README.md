@@ -3,7 +3,7 @@
 Understand any GitHub repo in seconds. Codebase is a full-stack intelligence platform that dynamically builds interactive architecture charts, file trees, language statistics, contributor panels, and features an AI-powered Q&A interface for any public GitHub repository.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render.svg)](https://render.com/deploy?repo=https://github.com/Reeshav12/CodeBase)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FReeshav12%2FCodeBase%2Ftree%2Fmain%2Fcodebase%2Ffrontend&envDescription=Backend%20API%20Base%20URL&envLink=https%3A%2F%2Frender.com&env=VITE_API_BASE_URL)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FReeshav12%2FCodeBase%2Ftree%2Fmain%2Ffrontend&envDescription=Backend%20API%20Base%20URL&envLink=https%3A%2F%2Frender.com&env=VITE_API_BASE_URL)
 
 ## Requirements
 

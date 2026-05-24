@@ -25,10 +25,10 @@ yarn-error.log*
 
 # Git ignore files inside nested folders can also match relatively, 
 # but adding specific relative paths for safety:
-codebase/backend/venv/
-codebase/backend/.env
-codebase/backend/codebase.db
-codebase/backend/server_logs.txt
-codebase/backend/__pycache__/
-codebase/frontend/node_modules/
-codebase/frontend/dist/
+backend/venv/
+backend/.env
+backend/codebase.db
+backend/server_logs.txt
+backend/__pycache__/
+frontend/node_modules/
+frontend/dist/
