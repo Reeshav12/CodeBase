@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api/client';
 import { useStore } from '../store/useStore';
@@ -10,7 +10,7 @@ import ChatPanel from '../components/ChatPanel';
 import StatsPanel from '../components/StatsPanel';
 import ContributorPanel from '../components/ContributorPanel';
 import CommitTimeline from '../components/CommitTimeline';
-import { ExternalLink, RefreshCw, Trash2, Github, LayoutGrid, FolderTree, BarChart3, Users, GitCommit, HardDrive, Scale, Calendar, Clock, GitBranch, AlertCircle, GitFork, Star, ShieldCheck } from 'lucide-react';
+import { ExternalLink, RefreshCw, Trash2, Github, LayoutGrid, FolderTree, BarChart3, HardDrive, Calendar, Clock, GitBranch, AlertCircle, GitFork, Star, ShieldCheck } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function RepoView() {

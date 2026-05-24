@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface User { id: number; email: string; username: string; full_name?: string; }
+interface User { id: number; email: string; username: string; full_name?: string; github_username?: string; }
 interface Repo { id: number; repo_full_name: string; description?: string; stars: number; language?: string; }
 
 interface Store {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const COLORS = ['#6366f1', '#8b5cf6', '#3b82f6', '#06b6d4', '#14b8a6', '#22c55e', '#f59e0b', '#f97316'];
@@ -51,7 +50,7 @@ export default function StatsPanel({ analysis }: StatsPanelProps) {
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                   labelLine={false}
                 >
-                  {pieData.map((entry, index) => (
+                  {pieData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="rgba(0,0,0,0)" />
                   ))}
                 </Pie>

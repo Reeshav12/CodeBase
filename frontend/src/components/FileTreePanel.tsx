@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronRight, ChevronDown, FileCode, FileText, File as FileIcon } from 'lucide-react';
 
 interface FileTreeItem {

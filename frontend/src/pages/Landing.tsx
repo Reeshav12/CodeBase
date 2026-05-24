@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Network, MessageSquare, Code2 } from 'lucide-react';
 
