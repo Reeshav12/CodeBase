@@ -1,0 +1,37 @@
+services:
+  # FastAPI Backend Service
+  - type: web
+    name: codebase-backend
+    env: python
+    rootDir: codebase/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Set this to your Supabase PostgreSQL connection string on Render Dashboard
+      - key: SECRET_KEY
+        generateValue: true # Render will automatically generate a secure JWT secret key
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "10080"
+      - key: GITHUB_TOKEN
+        sync: false # Add your GitHub personal access token on Render Dashboard
+      - key: GROQ_API_KEY
+        sync: false # Add your Groq API key on Render Dashboard
+      - key: OPENAI_API_KEY
+        sync: false # Add your OpenAI API key (optional) on Render Dashboard
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: codebase-redis
+          property: connectionString
+      - key: ALLOWED_ORIGINS
+        value: "http://localhost:5173,https://*.vercel.app"
+
+# Dedicated Redis Cache Service
+databases:
+  - name: codebase-redis
+    type: redis
+    plan: free # Provisions a completely free tier Redis instance
+    ipAllowList: [] # Only allows internal services to connect for maximum security
