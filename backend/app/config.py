@@ -9,8 +9,12 @@ class Settings(BaseSettings):
     GROQ_API_KEY: str = ""
     OPENAI_API_KEY: str = ""
     REDIS_URL: str = "redis://localhost:6379/0"
+    ALLOWED_ORIGINS: str = "*"
 
-    class Config:
-        env_file = ".env"
+    model_config = {
+        "env_file": ".env",
+        "extra": "ignore"
+    }
 
 settings = Settings()
+
