@@ -1,11 +1,26 @@
 from github import Github, GithubException
 from app.config import settings
 
-def get_client(): return Github(settings.GITHUB_TOKEN) if settings.GITHUB_TOKEN else Github()
+def get_client(): 
+    # Ignore common empty placeholder tokens
+    token = settings.GITHUB_TOKEN.strip() if settings.GITHUB_TOKEN else ""
+    if not token or token in ("YOUR_GITHUB_TOKEN", "dummy", "ghp_your_token_here"):
+        return Github()
+    return Github(token)
 
 async def fetch_repo_metadata(full_name: str) -> dict:
+    client = get_client()
     try:
-        repo = get_client().get_repo(full_name)
+        try:
+            repo = client.get_repo(full_name)
+        except GithubException as ge:
+            if ge.status == 401 and "Bad credentials" in ge.data.get("message", ""):
+                print("Warning: GITHUB_TOKEN has bad credentials. Falling back to anonymous client.")
+                client = Github()
+                repo = client.get_repo(full_name)
+            else:
+                raise ge
+        
         langs = repo.get_languages()
         total = sum(langs.values()) or 1
         contributors = []
@@ -34,7 +49,18 @@ async def fetch_repo_metadata(full_name: str) -> dict:
         raise ValueError(f"GitHub error: {e.data.get('message', str(e))}")
 
 async def fetch_file_tree(full_name: str) -> list:
-    repo = get_client().get_repo(full_name)
-    tree = repo.get_git_tree(sha=repo.default_branch, recursive=True)
-    return [{"path": i.path, "type": i.type, "size": i.size}
-            for i in tree.tree if i.path.count("/") < 4]
+    client = get_client()
+    try:
+        try:
+            repo = client.get_repo(full_name)
+        except GithubException as ge:
+            if ge.status == 401 and "Bad credentials" in ge.data.get("message", ""):
+                client = Github()
+                repo = client.get_repo(full_name)
+            else:
+                raise ge
+        tree = repo.get_git_tree(sha=repo.default_branch, recursive=True)
+        return [{"path": i.path, "type": i.type, "size": i.size}
+                for i in tree.tree if i.path.count("/") < 4]
+    except GithubException as e:
+        raise ValueError(f"GitHub error: {e.data.get('message', str(e))}")
