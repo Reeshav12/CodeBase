@@ -23,15 +23,14 @@ services:
         sync: false # Add your OpenAI API key (optional) on Render Dashboard
       - key: REDIS_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: codebase-redis
           property: connectionString
       - key: ALLOWED_ORIGINS
         value: "http://localhost:5173,https://*.vercel.app"
 
-# Dedicated Redis Cache Service
-databases:
-  - name: codebase-redis
-    type: redis
+  # Dedicated KeyValue (Redis) Cache Service
+  - type: keyvalue
+    name: codebase-redis
     plan: free # Provisions a completely free tier Redis instance
     ipAllowList: [] # Only allows internal services to connect for maximum security
